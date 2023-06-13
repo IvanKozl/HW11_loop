@@ -9,74 +9,79 @@ public class Main {
         task2();
         task3();
     }
-    public static void delyvery (int deliveryDistance) {
-        deliveryDistance = deliveryDistance;
+
+    public static int calculateDeliveryTime(int deliveryDistance) {
         int threeDayDelyvery = 100;
+        int deliveryDays = 0;
         int twoDayDelyvery = 60;
         int oneDayDelivery = 20;
-        int deliveryDay = 1;
-
         if (deliveryDistance < oneDayDelivery) {
-            System.out.println("Потребуется дней " + (deliveryDay) + " , срок доставки");
-        } else if (deliveryDistance >= oneDayDelivery && deliveryDistance <= twoDayDelyvery){
-            System.out.println("Потребуется дней " + (deliveryDay + 1) + " , срок доставки");
-        } else if (deliveryDistance > twoDayDelyvery && deliveryDistance <= threeDayDelyvery){
-            System.out.println("Потребуется дней " + (deliveryDay + 2) + " , срок доставки");
-        } else if (deliveryDistance > threeDayDelyvery){
-            System.out.println("Доставка не осуществляется");
+            deliveryDays = 1;
+        } else if (deliveryDistance <= twoDayDelyvery) {
+            deliveryDays = 2;
+        } else if (deliveryDistance <= threeDayDelyvery) {
+            deliveryDays = 3;
+        } else {
+            deliveryDays = -1;
         }
+        return deliveryDays;
+
     }
 
-    public static void year(int leapYear) {
+    public static void checkYearIsLeap(int leapYear) {
         int four = 4;
         int one = 100;
         int oneFour = 400;
-        if (leapYear % oneFour != 0 && (leapYear % four != 0 || leapYear % one == 0)) {
-            System.out.println("год не является високостным");
-        } else {
+        if (leapYear % oneFour == 0 || leapYear % four == 0 && leapYear % one != 0) {
             System.out.println("Год является високостным");
+        } else {
+            System.out.println("год не является високостным");
         }
 
     }
 
-    public static void clients(int clientOs, int clientYear) {
+    public static void calculateClientsProgram(int clientOs, int clientYear) {
         int android = 1;
-        int current_Year = LocalDate.now().getYear();
+        int currentYear = LocalDate.now().getYear();
         int iOs = 0;
         if (clientOs == iOs) {
-            if (clientYear >= current_Year) {
+            if (clientYear >= currentYear) {
                 System.out.println("Установите обычную версию приложения для iOS по ссылке");
-            } else if (clientYear < current_Year) {
+            } else if (clientYear < currentYear) {
                 System.out.println("Установите облегченную версию приложения для iOS по ссылке");
             }
         } else if (clientOs == android) {
-            if (clientYear >= current_Year) {
+            if (clientYear >= currentYear) {
                 System.out.println("Установите обычную версию приложения для Андроид по ссылке");
-
-        } else if (clientYear < current_Year) {
-            System.out.println("Установите облегченную версию приложения для Андроид по ссылке");
+            } else if (clientYear < currentYear) {
+                System.out.println("Установите облегченную версию приложения для Андроид по ссылке");
             }
         }
+
     }
 
     public static void task1() {
         System.out.println("Задача 1");
         int leapYear = 2001;
-        year(leapYear);
+        checkYearIsLeap(leapYear);
         --leapYear;
-        year(leapYear);
+        checkYearIsLeap(leapYear);
     }
 
     public static void task2() {
         System.out.println("Задача 2");
         int clientYear = 2018;
         int clientOs = 1;
-        clients(clientOs, clientYear);
+        calculateClientsProgram(clientOs, clientYear);
     }
 
     public static void task3() {
         System.out.println("Задача 3");
-        int deliveryDistance = 50;
-        delyvery (deliveryDistance);
+        int day = calculateDeliveryTime(50);
+        if (day > 0) {
+            System.out.println("Доставка займет " + day + " дней.");
+        } else {
+            System.out.println("Доставки нет");
+        }
     }
-    }
+}
